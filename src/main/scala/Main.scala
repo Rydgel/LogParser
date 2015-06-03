@@ -36,7 +36,7 @@ object LogParser {
       case Array("I", x, xs @ _*) => LogMessageM(Info, x.toInt, xs.mkString(" "))
       case Array("W", x, xs @ _*) => LogMessageM(Warning, x.toInt, xs.mkString(" "))
       case Array("E", x, y, xs @ _*) => LogMessageM(Error(x.toInt), y.toInt, xs.mkString(" "))
-      case xs => Unknown(xs.mkString)
+      case xs => Unknown(xs.mkString(" "))
     }
   }
 
@@ -92,7 +92,6 @@ object Main {
   }
 
   def main(args: Array[String]) {
-    // println(parseMessage("I 1356 The first thing she heard was a general chorus of 'There goes Bill!'"))
     val whatWentWrongList = whatWentWrong(parse(readFile()))
     println(whatWentWrongList.mkString("\n"))
   }
